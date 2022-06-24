@@ -67,10 +67,10 @@ class MainController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $data = $form->getData();
             $reservation = new Reservation();
-            $reservation->setUser($this->getUser());
+            $reservation->setUser($this->getUser()->getUserIdentifier());
             $reservation->setCheckindate ($data['checkin_date']);
             $reservation->setCheckoutdate ($data['checkout_date']);
-            $reservation->setRoom($Room);
+            $reservation->setRoom($Room->getId());
             $em->persist($reservation);
             $em->flush();
             return $this->redirectToRoute('app_home');
